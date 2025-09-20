@@ -244,11 +244,11 @@ font: inherit;
   border-radius: 8px;   /* optional: soften corners if PNG/JPG */
 }
 
-.hero-logo {
-  max-width: 550px;   /* adjust size */
-  height: auto;
-  margin-bottom: 1rem;
-  display: block;
+.hero-logo{
+  display:block;
+  height:auto;
+  width: clamp(260px, 28vw, 480px);
+  margin: 0 0 12px 0;
 }
 
 
@@ -280,7 +280,7 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 @media (max-width: 600px){ .brand-logo { height: 32px; } }
 
 /* Hero wordmark image above the tagline */
-.hero-logo { width: clamp(180px, 60vw, 320px); height: auto; margin: 0 0 12px 0; }
+/*.hero-logo { width: clamp(180px, 60vw, 320px); height: auto; margin: 0 0 12px 0; }*/
 
 /* Phone/screenshot mockup */
 .phone { width: min(92vw, 360px); margin-inline: auto; }
@@ -295,6 +295,12 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 /* Big headline scale for small phones */
 @media (max-width: 600px){
   .h1 { font-size: clamp(28px, 7.8vw, 36px); line-height: 1.15; }
+}
+
+@media (max-width: 600px){
+  .hero-logo{
+    width: min(94vw, 680px);  /* fills most of the screen width */
+  }
 }
 
 
