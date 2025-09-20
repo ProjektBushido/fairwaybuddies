@@ -157,11 +157,33 @@ background-repeat: no-repeat;
     .quote { background: var(--card); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 1.1rem; box-shadow: var(--shadow); }
 
     /* ====== FAQ ====== */
-    .faq { grid-template-columns: 1fr 1fr; }
-    details { background: var(--card); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 1rem 1rem; }
-    details + details { margin-top: .9rem; }
-    summary { cursor: pointer; font-weight: 700; }
-    details[open] { outline: none; box-shadow: var(--ring); }
+/* FAQ grid: consistent spacing */
+.faq{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 1.25rem;                /* use gap, not margins on items */
+}
+
+/* reset any old margins on details items inside the grid */
+.faq details{ margin: 0; }
+
+/* Keep it single column on small screens */
+@media (max-width: 860px){
+  .faq{ grid-template-columns: 1fr; }
+}
+
+/* (optional) darker glass for FAQ boxes only */
+.faq details{
+  background: rgba(0,0,0,.42);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+          backdrop-filter: blur(6px) saturate(120%);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 1rem 1rem;
+}
+
+/* highlight open item without changing its size */
+.faq details[open]{ box-shadow: var(--ring); outline: none; }
 
     /* ====== CTA / Footer ====== */
     .cta { text-align: center; padding: 4.5rem 0; }
@@ -306,7 +328,63 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 
 
 
+/* ===== Site background & overlay ===== */
+.fb-background,
+.fb-scrim {
+  position: fixed;   /* stays put while you scroll */
+  inset: 0;
+  pointer-events: none;   /* never blocks clicks */
+}
 
+/* Background image layer */
+.fb-background{
+  z-index: -2;
+  /* change the url to your file (keep path/case exact) */
+  background: url("./images/fb-background.jpg") center / cover no-repeat fixed;
+  /* optional: add a subtle green tint if your photo is light */
+  /* background-blend-mode: multiply; */
+}
+
+/* Transparent overlay between background and content */
+.fb-scrim{
+  z-index: -1;
+  /* base scrim + vertical gradient for extra legibility near hero */
+  --scrim: rgba(0,0,0,.35);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.35) 35%, rgba(0,0,0,.45) 100%),
+    var(--scrim);
+  /* soft blur that works in Safari/iOS too */
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+}
+
+/* On small phones, make the scrim a touch stronger */
+@media (max-width: 600px){
+  .fb-scrim{ --scrim: rgba(0,0,0,.50); }
+}
+
+/* Ensure text always renders with your chosen color (prevents iOS auto-tint) */
+:root { color-scheme: dark; }
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#0b3d20; --bg-soft:#184d28; --card:rgba(255,255,255,.06);
+    --text:#f5f8f0; --muted:#c8d5c0; --shadow:0 10px 35px rgba(0,0,0,.45);
+  }
+}
+body, h1, h2, h3, p, li, .h1, .lead, .tag { color: var(--text)!important; }
+
+
+/* Darker glass overlay for all cards/boxes */
+:root { --card: rgba(0, 0, 0, 0.38); }   /* was rgba(255,255,255,.06) */
+@media (prefers-color-scheme: light){
+  :root { --card: rgba(10,16,30, .10); } /* keep lighter in light mode */
+}
+
+/* (optional) add a bit of glass blur inside each box */
+.card, .shot, .plan, .quote, details, .contact-card, .mock {
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+          backdrop-filter: blur(6px) saturate(120%);
+}
 
 
 
@@ -320,6 +398,12 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 
 
 <body>
+
+    <!-- Background image -->
+    <div class="fb-background" aria-hidden="true"></div>
+
+    <!-- Transparent overlay (scrim) above the background -->
+    <div class="fb-scrim" aria-hidden="true"></div>
     
   <!-- ===== Header ===== -->
   <header class="header">
