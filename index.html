@@ -341,19 +341,12 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
       <div>
         <!-- Wordmark/Logo: responsive, high-DPI, never overflows -->
         <img
-          src="images/fairway-buddies_light.png"
-          srcset="
-            images/fairway-buddies_light.png 320w,
-            images/fairway-buddies_light@2x.png 640w,
-            images/fairway-buddies_light@3x.png 960w
-          "
-          sizes="(max-width:600px) 60vw, (max-width:960px) 40vw, 320px"
-          width="640" height="180"
-          alt="Fairway Buddies Logo"
-          class="hero-logo"
-          decoding="async"
-          fetchpriority="high"
-        >
+        src="./images/fairway-buddies_light.png"
+        alt="Fairway Buddies Logo"
+        class="hero-logo"
+        width="640" height="180"
+        decoding="async" fetchpriority="high"
+      />
   
         <div class="tag">Golf is better together</div>
         <h1 class="h1">More than a game — it’s the buddies you make.</h1>
@@ -374,35 +367,13 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
   
       <div class="mock" aria-hidden="true">
         <div class="phone">
-          <!-- App Screenshot: responsive, cropped safely if needed -->
-          <picture>
-            <source type="image/avif"
-                    srcset="
-                      images/app_discover-360.avif 360w,
-                      images/app_discover-540.avif 540w,
-                      images/app_discover-720.avif 720w,
-                      images/app_discover-1080.avif 1080w">
-            <source type="image/webp"
-                    srcset="
-                      images/app_discover-360.webp 360w,
-                      images/app_discover-540.webp 540w,
-                      images/app_discover-720.webp 720w,
-                      images/app_discover-1080.webp 1080w">
-            <img
-              src="images/app_discover.jpeg"
-              srcset="
-                images/app_discover-360.jpg 360w,
-                images/app_discover-540.jpg 540w,
-                images/app_discover-720.jpg 720w,
-                images/app_discover-1080.jpg 1080w"
-              sizes="(max-width:600px) 92vw, (max-width:960px) 420px, 520px"
-              width="1170" height="2532"
-              alt="Fairway Buddies App Screenshot"
-              class="screen-img"
-              loading="lazy"
-              decoding="async"
-            >
-          </picture>
+          <img
+            src="./images/app_discover.jpeg"
+            alt="Fairway Buddies App Screenshot"
+            class="screen-img"
+            width="1170" height="2532"
+            loading="lazy" decoding="async"
+          />
         </div>
       </div>
     </div>
