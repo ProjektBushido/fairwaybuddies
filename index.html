@@ -41,17 +41,14 @@
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body {
-      margin: 0;
-      background: radial-gradient(1000px 600px at 85% -10%, rgba(250,204,21,.35), transparent 60%),
-                radial-gradient(800px 500px at -10% 10%, rgba(74,222,128,.35), transparent 60%), /* fairway green */
-                linear-gradient(180deg, #184d28, #0b3d20); /* deep grass gradient */
-        background-attachment: fixed;
-      color: var(--text);
-      font: 16px/1.5 var(--font);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    body{
+  margin: 0;
+  background-color:#0b3d20;   /* simple fallback while image loads */
+  color: var(--text);
+  font: 16px/1.5 var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
     
 /* ===== Mobile polish & iOS fixes ===== */
 html, body { -webkit-text-size-adjust: 100%; }
@@ -325,16 +322,6 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
   }
 }
 
-
-
-
-/* ===== Site background & overlay ===== */
-.fb-background,
-.fb-scrim {
-  position: fixed;   /* stays put while you scroll */
-  inset: 0;
-  pointer-events: none;   /* never blocks clicks */
-}
 
 /* Background image layer */
 .fb-background{
