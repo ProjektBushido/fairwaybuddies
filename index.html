@@ -76,8 +76,17 @@ section { scroll-margin-top: calc(var(--header-h) + env(safe-area-inset-top)); }
 .btn { min-height: 44px; }
 }
 /* iOS: avoid jank with fixed backgrounds + parallax */
-@media (hover: none) and (pointer: coarse) {
-body { background-attachment: scroll; }
+/* Fixed background layer for all devices (including iPhone) */
+.bg-fixed{
+position: fixed;
+inset: 0;
+z-index: -1;
+pointer-events: none;
+background: radial-gradient(1000px 600px at 85% -10%, rgba(250,204,21,.35), transparent 60%),
+radial-gradient(800px 500px at -10% 10%, rgba(74,222,128,.35), transparent 60%),
+linear-gradient(180deg, #184d28, #0b3d20);
+background-size: cover;
+background-repeat: no-repeat;
 }
 
 
