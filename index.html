@@ -338,16 +338,23 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 
 /* Background image layer */
 .fb-background{
-  z-index: -2;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   /* change the url to your file (keep path/case exact) */
   background: url("./images/fb-background.jpg") center / cover no-repeat fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   /* optional: add a subtle green tint if your photo is light */
   /* background-blend-mode: multiply; */
 }
 
 /* Transparent overlay between background and content */
 .fb-scrim{
-  z-index: -1;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
   /* base scrim + vertical gradient for extra legibility near hero */
   --scrim: rgba(0,0,0,.35);
   background:
@@ -357,6 +364,8 @@ img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
 }
+
+.main-content{ position: relative; z-index: 2; }
 
 /* On small phones, make the scrim a touch stronger */
 @media (max-width: 600px){
@@ -404,6 +413,8 @@ body, h1, h2, h3, p, li, .h1, .lead, .tag { color: var(--text)!important; }
 
     <!-- Transparent overlay (scrim) above the background -->
     <div class="fb-scrim" aria-hidden="true"></div>
+
+    <main class="main-content">
     
   <!-- ===== Header ===== -->
   <header class="header">
@@ -717,6 +728,6 @@ body, h1, h2, h3, p, li, .h1, .lead, .tag { color: var(--text)!important; }
       });
     })();
     </script>
-
+</main>
 </body>
 </html>
