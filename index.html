@@ -9,6 +9,7 @@
   <meta property="og:description" content="Match with golfers by skill level, discover nearby courses, and tee off with new friends." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0f172a" />
+  <meta name="color-scheme" content="dark">
 
   <style>
     /* ====== Design tokens ====== */
@@ -251,6 +252,59 @@ font: inherit;
 }
 
 
+
+/* --- Force the same palette on iOS/Light mode --- */
+:root { color-scheme: dark; }             /* tells Safari to use dark UI defaults */
+
+/* If the device is set to Light, keep our dark golf palette anyway */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg: #0b3d20;
+    --bg-soft: #184d28;
+    --card: rgba(255,255,255,0.06);
+    --text: #f5f8f0;
+    --muted: #c8d5c0;
+    --shadow: 0 10px 35px rgba(0,0,0,.45);
+  }
+}
+
+/* Explicit text colors so Safari doesn’t auto-tint */
+body, h1, h2, h3, h4, h5, h6, p, li, .h1, .lead, .tag { color: var(--text) !important; }
+.tag{ opacity:.75; }
+
+/* Make images never overflow on mobile */
+img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
+
+/* Header logo size (top-left) */
+.brand-logo { height: 36px; width: auto; }
+@media (max-width: 600px){ .brand-logo { height: 32px; } }
+
+/* Hero wordmark image above the tagline */
+.hero-logo { width: clamp(180px, 60vw, 320px); height: auto; margin: 0 0 12px 0; }
+
+/* Phone/screenshot mockup */
+.phone { width: min(92vw, 360px); margin-inline: auto; }
+.phone img, .screen-img { width: 100%; height: auto; border-radius: 18px; }
+
+/* Screens/gallery grid (if you have one) */
+.screens-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+@media (max-width: 960px){ .screens-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 600px){ .screens-grid { grid-template-columns: 1fr; } }
+.screens-grid img { width: 100%; height: auto; border-radius: 16px; }
+
+/* Big headline scale for small phones */
+@media (max-width: 600px){
+  .h1 { font-size: clamp(28px, 7.8vw, 36px); line-height: 1.15; }
+}
+
+
+
+
+
+
+
+
+
   </style>
 </head>
 
@@ -285,25 +339,70 @@ font: inherit;
   <section class="hero container">
     <div class="hero-wrap">
       <div>
-        <img src="images/fairway-buddies_light.png" alt="Fairway Buddies Logo" class="hero-logo">
-
+        <!-- Wordmark/Logo: responsive, high-DPI, never overflows -->
+        <img
+          src="images/fairway-buddies_light.png"
+          srcset="
+            images/fairway-buddies_light.png 320w,
+            images/fairway-buddies_light@2x.png 640w,
+            images/fairway-buddies_light@3x.png 960w
+          "
+          sizes="(max-width:600px) 60vw, (max-width:960px) 40vw, 320px"
+          width="640" height="180"
+          alt="Fairway Buddies Logo"
+          class="hero-logo"
+          decoding="async"
+          fetchpriority="high"
+        >
+  
         <div class="tag">Golf is better together</div>
         <h1 class="h1">More than a game — it’s the buddies you make.</h1>
         <p>Fairway Buddies matches golfers by <strong>skill level</strong>, <strong>location</strong>, and <strong>availability</strong>. Find your pace, make new friends, and tee off with confidence.</p>
+  
         <div class="hero-ctas">
           <a class="btn" href="#download">Download the app</a>
           <a class="btn outline" href="#pricing">See Premium</a>
         </div>
+  
         <div class="badges" id="download" aria-label="App store badges">
           <div class="store-badge"> App Store (coming soon)</div>
           <div class="store-badge">Google Play (later)</div>
         </div>
+  
         <p class="muted" style="margin-top:.6rem">No random pairings. No pressure. Just great rounds with people who play like you.</p>
       </div>
-
+  
       <div class="mock" aria-hidden="true">
         <div class="phone">
-            <img src="images/app_discover.jpeg" alt="Fairway Buddies App Screenshot" class="screen-img">
+          <!-- App Screenshot: responsive, cropped safely if needed -->
+          <picture>
+            <source type="image/avif"
+                    srcset="
+                      images/app_discover-360.avif 360w,
+                      images/app_discover-540.avif 540w,
+                      images/app_discover-720.avif 720w,
+                      images/app_discover-1080.avif 1080w">
+            <source type="image/webp"
+                    srcset="
+                      images/app_discover-360.webp 360w,
+                      images/app_discover-540.webp 540w,
+                      images/app_discover-720.webp 720w,
+                      images/app_discover-1080.webp 1080w">
+            <img
+              src="images/app_discover.jpeg"
+              srcset="
+                images/app_discover-360.jpg 360w,
+                images/app_discover-540.jpg 540w,
+                images/app_discover-720.jpg 720w,
+                images/app_discover-1080.jpg 1080w"
+              sizes="(max-width:600px) 92vw, (max-width:960px) 420px, 520px"
+              width="1170" height="2532"
+              alt="Fairway Buddies App Screenshot"
+              class="screen-img"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
         </div>
       </div>
     </div>
