@@ -294,7 +294,7 @@ body, h1, h2, h3, h4, h5, h6, p, li, .h1, .lead, .tag { color: var(--text) !impo
 /* Make images never overflow on mobile */
 img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
 
-/* Header logo size (top-left)  */
+/* Header logo size (top-left) */
 .brand-logo { height: 36px; width: auto; }
 @media (max-width: 600px){ .brand-logo { height: 32px; } }
 
@@ -382,7 +382,13 @@ body, h1, h2, h3, p, li, .h1, .lead, .tag { color: var(--text)!important; }
           backdrop-filter: blur(6px) saturate(120%);
 }
 
-
+.fb-bg{ position: fixed; inset: 0; z-index: 0; pointer-events:none; overflow:hidden; }
+.fb-bg-img{
+  position:absolute; inset:0;
+  width:100vw; height:100vh;
+  object-fit: cover;         /* cover without zoom bugs */
+  object-position: 50% 25%;  /* tweak framing on mobile if needed */
+}
 
 
   </style>
@@ -396,7 +402,9 @@ body, h1, h2, h3, p, li, .h1, .lead, .tag { color: var(--text)!important; }
 <body>
 
     <!-- Background image -->
-    <div class="fb-background" aria-hidden="true"></div>
+    <div class="fb-bg">
+      <img src="./images/fb-background.jpg" alt="" class="fb-bg-img" />
+    </div>
 
     <!-- Transparent overlay (scrim) above the background -->
     <div class="fb-scrim" aria-hidden="true"></div>
