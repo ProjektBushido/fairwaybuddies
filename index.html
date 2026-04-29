@@ -3,726 +3,1341 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Fairway Buddies • Find your perfect golf partner</title>
-  <meta name="description" content="Fairway Buddies connects golfers by skill, location, and vibe. Match up, chat, and tee off with new friends—without the awkward random pairings." />
-  <meta property="og:title" content="Fairway Buddies" />
-  <meta property="og:description" content="Match with golfers by skill level, discover nearby courses, and tee off with new friends." />
+  <title>Fairway Buddies | Find Golf Partners, Track Rounds & Join Golf Chat Rooms</title>
+  <meta name="description" content="Fairway Buddies helps golfers find compatible playing partners by location, skill level, schedule, and vibe. Join golf chat rooms, track rounds with a virtual scorecard, discover courses nearby, and build your golf community." />
+  <meta name="keywords" content="golf app, find golf partners, golf buddies, golf community app, golf matchmaking app, find golfers near me, golf social app, golf scorecard app, track golf rounds, golf chat rooms, golf friends app, golf partner finder, golf networking, tee time partners" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fairwaybuddies.app" />
+
+  <meta property="og:title" content="Fairway Buddies — Find Your Golf People" />
+  <meta property="og:description" content="Match with golfers by skill, location, and shared availability. Join community chat rooms, track rounds, and make golf more social." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0f172a" />
-  <meta name="color-scheme" content="dark">
+  <meta property="og:url" content="https://fairwaybuddies.app" />
+  <meta property="og:image" content="https://fairwaybuddies.app/images/preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Find Golf Buddies Near You" />
+  <meta name="twitter:description" content="No more bad pairings. Match with golfers by location, skill, availability, and vibe." />
+  <meta name="twitter:image" content="https://fairwaybuddies.app/images/preview.png" />
+
+  <meta name="theme-color" content="#07140d" />
+  <meta name="color-scheme" content="dark" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Fairway Buddies",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "iOS",
+    "description": "Fairway Buddies helps golfers find compatible playing partners, join golf chat rooms, discover courses, and track rounds.",
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Starter" },
+      { "@type": "Offer", "price": "4.99", "priceCurrency": "USD", "name": "Premium Monthly" },
+      { "@type": "Offer", "price": "23.99", "priceCurrency": "USD", "name": "Premium 6 Months" },
+      { "@type": "Offer", "price": "29.99", "priceCurrency": "USD", "name": "Premium Annual" }
+    ],
+    "url": "https://fairwaybuddies.app",
+    "downloadUrl": "https://apps.apple.com/us/app/fairway-buddies/id6752227564"
+  }
+  </script>
 
   <style>
-    /* ====== Design tokens ====== */
     :root {
---bg: #0b3d20; /* dark green base */
---bg-soft: #184d28;
---card: rgba(255,255,255,0.06);
---text: #f5f8f0;
---muted: #c8d5c0;
---brand: #4ade80; /* golf green accent */
---brand-2: #facc15; /* golf ball yellow accent */
---danger: #ef4444;
---shadow: 0 10px 35px rgba(0,0,0,.45);
---radius: 18px;
---radius-lg: 28px;
---ring: 0 0 0 8px rgba(74, 222, 128, .2);
---font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-    }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f6f7fb;
-        --bg-soft: #ffffff;
-        --card: rgba(10,16,30,0.05);
-        --text: #0b1020;
-        --muted: #425072;
-        --shadow: 0 8px 28px rgba(15,23,42,.08);
-      }
+      --bg: #07140d;
+      --bg-2: #0b1f14;
+      --ink: #f7fff4;
+      --muted: #b9c9b6;
+      --muted-2: #7f927e;
+      --line: rgba(255,255,255,.12);
+      --line-strong: rgba(255,255,255,.22);
+      --glass: rgba(10, 28, 18, .58);
+      --glass-2: rgba(255,255,255,.065);
+      --green: #66f28e;
+      --green-2: #2ee6ac;
+      --gold: #ffd166;
+      --blue: #8bd3ff;
+      --pink: #ff87d4;
+      --shadow: 0 26px 70px rgba(0,0,0,.42);
+      --shadow-soft: 0 18px 44px rgba(0,0,0,.25);
+      --radius: 24px;
+      --radius-xl: 36px;
+      --header-h: 76px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body{
-  margin: 0;
-  background-color:#0b3d20;   /* simple fallback while image loads */
-  color: var(--text);
-  font: 16px/1.5 var(--font);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-    
-/* ===== Mobile polish & iOS fixes ===== */
-html, body { -webkit-text-size-adjust: 100%; }
-img, video { max-width: 100%; height: auto; }
-:root { --header-h: 72px; }
-/* make anchor jumps account for sticky header & iOS notch */
-section { scroll-margin-top: calc(var(--header-h) + env(safe-area-inset-top)); }
-@supports (padding: max(0px)) {
-.header { padding-top: max(12px, env(safe-area-inset-top)); }
-}
-/* default hide burger; show on mobile */
-.menu-btn { display: none; }
-@media (max-width: 960px) {
-.container { padding-left: 16px; padding-right: 16px; }
-.h1 { font-size: clamp(32px, 7vw, 40px); line-height: 1.15; }
-.tag { font-size: 12px; letter-spacing: .08em; }
-.nav-links { display: none; }
-.menu-btn { display: inline-flex; }
-.hero, .section { padding-top: 56px; padding-bottom: 56px; }
-/* stack hero columns */
-.hero .grid, .hero .hero-wrap { display: grid; grid-template-columns: 1fr; gap: 28px; }
-.phone { margin: 0 auto; max-width: 420px; }
-.btn { min-height: 44px; }
-}
-/* iOS: avoid jank with fixed backgrounds + parallax */
-/* Fixed background layer for all devices (including iPhone) */
-.bg-fixed{
-position: fixed;
-inset: 0;
-z-index: -1;
-pointer-events: none;
-background: radial-gradient(1000px 600px at 85% -10%, rgba(250,204,21,.35), transparent 60%),
-radial-gradient(800px 500px at -10% 10%, rgba(74,222,128,.35), transparent 60%),
-linear-gradient(180deg, #184d28, #0b3d20);
-background-size: cover;
-background-repeat: no-repeat;
-}
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.55 var(--font);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-
-
-
+    img, svg { display: block; max-width: 100%; height: auto; }
     a { color: inherit; text-decoration: none; }
-    .container { width: min(1120px, 92vw); margin-inline: auto; }
+    button, input, textarea { font: inherit; }
+    section { scroll-margin-top: calc(var(--header-h) + 18px); }
+
+    .noise,
+    .orb-field,
+    .hero-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-bg {
+      z-index: -4;
+      background: #07140d;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: .5;
+      filter: saturate(1.15) contrast(1.05);
+    }
+
+    .orb-field {
+      z-index: -3;
+      background:
+        radial-gradient(900px 520px at 14% 10%, rgba(102,242,142,.22), transparent 62%),
+        radial-gradient(780px 520px at 92% 4%, rgba(255,209,102,.20), transparent 58%),
+        radial-gradient(760px 540px at 72% 74%, rgba(139,211,255,.14), transparent 60%),
+        linear-gradient(180deg, rgba(7,20,13,.58), rgba(7,20,13,.88) 48%, #07140d 100%);
+    }
+
+    .noise {
+      z-index: -2;
+      opacity: .18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='.42'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    .container { width: min(1160px, calc(100% - 38px)); margin-inline: auto; }
+    .section { padding: clamp(72px, 8vw, 118px) 0; }
+    .section-tight { padding: clamp(54px, 6vw, 84px) 0; }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.045));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      -webkit-backdrop-filter: blur(18px) saturate(132%);
+      backdrop-filter: blur(18px) saturate(132%);
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(7,20,13,.88), rgba(7,20,13,.62));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      backdrop-filter: blur(18px) saturate(140%);
+    }
+
+    .nav {
+      min-height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .brand img { height: 42px; width: auto; }
+    .brand-text { display: grid; line-height: 1.02; }
+    .brand-text strong { font-size: .94rem; letter-spacing: .02em; }
+    .brand-text span { color: var(--muted); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 7px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 999px;
+      background: rgba(255,255,255,.045);
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: .88rem;
+      padding: 10px 13px;
+      border-radius: 999px;
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      background: rgba(255,255,255,.08);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .mobile-toggle { display: none; }
+
     .btn {
-      display: inline-flex; align-items: center; gap: .6rem;
-      padding: .9rem 1.15rem; border-radius: 12px; font-weight: 700;
-      background: linear-gradient(135deg, var(--brand), #24e1c0);
-      color: #03261d; box-shadow: var(--shadow);
-      transition: transform .2s ease, box-shadow .2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 999px;
+      color: #05100a;
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      font-weight: 900;
+      letter-spacing: -.01em;
+      box-shadow: 0 16px 40px rgba(46,230,172,.24);
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      white-space: nowrap;
     }
-    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(0,0,0,.35); }
-    .btn.outline { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,.18); }
-    .tag { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-    .h1 { font-size: clamp(2.25rem, 4vw + .5rem, 4rem); line-height: 1.05; margin: .35rem 0 1rem; }
-    .h2 { font-size: clamp(1.6rem, 2.2vw + .6rem, 2.5rem); line-height: 1.15; }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 22px 54px rgba(46,230,172,.28); }
+    .btn:active { transform: translateY(0); }
+
+    .btn.secondary {
+      color: var(--ink);
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: none;
+    }
+
+    .btn.dark {
+      color: var(--ink);
+      background: rgba(5,16,10,.72);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #dfffe7;
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 24px rgba(102,242,142,.78);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      color: var(--muted);
+      font-weight: 800;
+      font-size: .82rem;
+    }
+
+    .h1,
+    .h2,
+    .h3 { margin: 0; letter-spacing: -.055em; line-height: .96; }
+    .h1 { font-size: clamp(3.15rem, 8.2vw, 7.7rem); max-width: 10.5ch; }
+    .h2 { font-size: clamp(2.35rem, 5vw, 4.8rem); max-width: 12ch; }
+    .h3 { font-size: clamp(1.55rem, 2.6vw, 2.45rem); line-height: 1.04; letter-spacing: -.04em; }
+    .lead { color: var(--muted); font-size: clamp(1.04rem, 1.7vw, 1.25rem); max-width: 66ch; }
     .muted { color: var(--muted); }
-    .grid { display: grid; gap: 1.25rem; }
+    .tiny { color: var(--muted-2); font-size: .88rem; }
+    .gradient-text { background: linear-gradient(135deg, #fff, #dfffe7 44%, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-    /* ====== Header ====== */
-    .header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(10px); background: linear-gradient(to bottom, rgba(11,16,32,.85), rgba(11,16,32,.55)); border-bottom: 1px solid rgba(255,255,255,.06); }
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: .9rem 0; }
-    .brand { display: flex; align-items: center; gap: .65rem; font-weight: 800; letter-spacing: .3px; }
-    .logo { width: 34px; height: 34px; border-radius: 10px; background: conic-gradient(from 220deg at 50% 50%, var(--brand), var(--brand-2), #7dd3fc, var(--brand)); display: grid; place-items: center; color: #001f16; font-weight: 900; box-shadow: var(--shadow); }
-    .nav-links { display: flex; align-items: center; gap: 1.2rem; }
-    .nav-links a { padding: .5rem .75rem; border-radius: 10px; color: var(--muted); }
-    .nav-links a:hover { background: rgba(255,255,255,.06); color: var(--text); }
-    .nav-cta { display: none; }
-    .menu-btn { display: none; }
-
-    /* ====== Hero ====== */
-    .hero { padding: 6.5rem 0 4rem; }
-    .hero-wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: center; }
-    .hero p { font-size: 1.125rem; color: var(--muted); max-width: 42ch; }
-    .hero-ctas { display: flex; gap: .9rem; margin-top: 1.25rem; flex-wrap: wrap; }
-    .badges { display: flex; gap: .6rem; align-items: center; margin-top: .9rem; }
-    .store-badge { height: 44px; min-width: 140px; border-radius: 10px; border: 1px dashed rgba(255,255,255,.25); display: grid; place-items: center; color: var(--muted); padding: .4rem .8rem; }
-
-    .mock { background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05)); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-lg); padding: 1.1rem; box-shadow: var(--shadow); position: relative; }
-    .phone { aspect-ratio: 9/19.5; border-radius: 28px; background: #0a0f1e; border: 10px solid #0a0f1e; position: relative; overflow: hidden; }
-    .phone .screen { inset: 0; position: absolute; background: linear-gradient(180deg, #0f172a, #0b1020); display: grid; place-items: center; color: var(--muted); font-weight: 700; letter-spacing: .04em; }
-
-    /* ====== Features ====== */
-    .section { padding: 4.5rem 0; }
-    .cards { grid-template-columns: repeat(12, 1fr); }
-    .card { grid-column: span 4; background: var(--card); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 1.2rem; box-shadow: var(--shadow); }
-    .card h3 { margin: .6rem 0 .35rem; }
-    .icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(135deg, rgba(22,209,154,.25), rgba(96,165,250,.18)); border: 1px solid rgba(255,255,255,.18); }
-
-    /* ====== Screens ====== */
-    .screens { grid-template-columns: repeat(3, 1fr); }
-    .shot { background: var(--card); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: .7rem; box-shadow: var(--shadow); }
-    .shot .ph { aspect-ratio: 9/19.5; border-radius: 20px; background: linear-gradient(180deg, #1f2937, #0b1020); display: grid; place-items: center; color: var(--muted); font-weight: 700; }
-
-    /* ====== Pricing ====== */
-    .pricing { grid-template-columns: repeat(12, 1fr); align-items: stretch; }
-    .plan { grid-column: span 6; background: var(--card); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-lg); padding: 1.4rem; position: relative; overflow: hidden; }
-    .plan .price { font-size: 2.4rem; font-weight: 900; }
-    .plan ul { list-style: none; padding: 0; margin: 1rem 0; color: var(--muted); }
-    .plan li { display: flex; gap: .6rem; align-items: start; margin: .5rem 0; }
-
-    /* ====== Testimonials ====== */
-    .testis { grid-template-columns: repeat(3, 1fr); }
-    .quote { background: var(--card); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 1.1rem; box-shadow: var(--shadow); }
-
-    /* ====== FAQ ====== */
-/* FAQ grid: consistent spacing */
-.faq{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 1.25rem;                /* use gap, not margins on items */
-}
-
-/* reset any old margins on details items inside the grid */
-.faq details{ margin: 0; }
-
-/* Keep it single column on small screens */
-@media (max-width: 860px){
-  .faq{ grid-template-columns: 1fr; }
-}
-
-/* (optional) darker glass for FAQ boxes only */
-.faq details{
-  background: rgba(0,0,0,.42);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
-          backdrop-filter: blur(6px) saturate(120%);
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  padding: 1rem 1rem;
-}
-
-/* highlight open item without changing its size */
-.faq details[open]{ box-shadow: var(--ring); outline: none; }
-
-    /* ====== CTA / Footer ====== */
-    .cta { text-align: center; padding: 4.5rem 0; }
-    .footer { border-top: 1px solid rgba(255,255,255,.12); background: linear-gradient(to top, rgba(255,255,255,.04), transparent); padding: 2.2rem 0; color: var(--muted); }
-    .footgrid { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; }
-    .social { display: flex; gap: .8rem; }
-
-    /* ====== Responsive ====== */
-    @media (max-width: 1000px) {
-      .hero { padding-top: 5.5rem; }
-      .hero-wrap { grid-template-columns: 1fr; }
+    .hero {
+      padding: clamp(64px, 8vw, 108px) 0 40px;
     }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: clamp(30px, 5vw, 72px);
+      align-items: center;
+    }
+
+    .hero-copy { display: grid; gap: 22px; }
+    .hero-logo { width: min(520px, 88vw); margin: 2px 0 -8px; filter: drop-shadow(0 16px 30px rgba(0,0,0,.22)); }
+
+    .hero-ctas,
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .proof-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.10);
+      font-weight: 750;
+      font-size: .9rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 640px;
+    }
+
+    .phone-stage {
+      position: relative;
+      min-height: 640px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      padding: 24px;
+      isolation: isolate;
+    }
+
+    .phone-stage::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -34% -20%;
+      height: 56%;
+      background: radial-gradient(closest-side, rgba(102,242,142,.24), transparent 72%);
+      z-index: -1;
+    }
+
+    .phone {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(310px, 70vw);
+      aspect-ratio: 9 / 19.5;
+      border: 11px solid #050907;
+      border-radius: 42px;
+      background: #050907;
+      box-shadow: 0 34px 90px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.12);
+      overflow: hidden;
+    }
+
+    .phone.primary { transform: translate(-50%, -50%) rotate(-5deg); z-index: 3; }
+    .phone.secondary { width: min(250px, 54vw); transform: translate(-2%, -48%) rotate(9deg); opacity: .78; z-index: 2; filter: saturate(.92); }
+    .phone.tertiary { width: min(228px, 50vw); transform: translate(-104%, -36%) rotate(-13deg); opacity: .58; z-index: 1; filter: blur(.2px) saturate(.8); }
+
+    .phone img { width: 100%; height: 100%; object-fit: cover; border-radius: 30px; }
+
+    .floating-card {
+      position: absolute;
+      z-index: 5;
+      max-width: 245px;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(5,16,10,.72);
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow: var(--shadow-soft);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      backdrop-filter: blur(16px) saturate(140%);
+    }
+
+    .floating-card strong { display: block; margin-bottom: 2px; }
+    .floating-card span { display: block; color: var(--muted); font-size: .88rem; }
+    .float-1 { top: 36px; left: 24px; }
+    .float-2 { right: 14px; top: 142px; }
+    .float-3 { left: 42px; bottom: 50px; }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .mini {
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .mini strong {
+      display: block;
+      font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+      margin-bottom: 6px;
+    }
+
+    .mini span { color: var(--muted); font-size: .92rem; }
+
+    .marquee {
+      margin-top: 36px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+      background: rgba(255,255,255,.045);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 36s linear infinite;
+    }
+
+    .marquee span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 22px;
+      color: var(--muted);
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .marquee b { color: var(--green); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+      gap: clamp(28px, 5vw, 70px);
+      align-items: start;
+    }
+
+    .section-head { display: grid; gap: 16px; margin-bottom: 30px; }
+    .section-head.center { text-align: center; justify-items: center; }
+    .section-head.center .h2 { max-width: 13ch; }
+    .section-head.center .lead { margin-inline: auto; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      grid-column: span 4;
+      min-height: 250px;
+      padding: 24px;
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card.wide { grid-column: span 6; }
+    .feature-card.hero-card { grid-column: span 8; min-height: 320px; }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -35% -40% 25%;
+      height: 55%;
+      background: radial-gradient(closest-side, rgba(102,242,142,.16), transparent 72%);
+      pointer-events: none;
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 17px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(102,242,142,.18), rgba(139,211,255,.12));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.16);
+      font-size: 1.28rem;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 { font-size: 1.34rem; line-height: 1.08; letter-spacing: -.035em; margin: 0 0 10px; }
+    .feature-card p { margin: 0; color: var(--muted); }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .showcase-card {
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      min-height: 560px;
+      display: grid;
+      align-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .showcase-card::before {
+      content: "";
+      position: absolute;
+      inset: -20% -40% auto auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255,209,102,.12);
+      filter: blur(2px);
+    }
+
+    .screen-frame {
+      width: min(235px, 76%);
+      aspect-ratio: 9 / 19.5;
+      margin: 0 auto;
+      border-radius: 32px;
+      border: 8px solid #050907;
+      background: #050907;
+      box-shadow: 0 22px 54px rgba(0,0,0,.42);
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    .screen-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
+    .showcase-copy { position: relative; z-index: 2; padding: 8px 4px 2px; }
+    .showcase-copy h3 { margin: 0 0 8px; font-size: 1.35rem; letter-spacing: -.035em; line-height: 1.08; }
+    .showcase-copy p { margin: 0; color: var(--muted); }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      position: sticky;
+      top: calc(var(--header-h) + 28px);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: #05100a;
+      background: var(--green);
+      font-weight: 950;
+      box-shadow: 0 12px 30px rgba(102,242,142,.20);
+    }
+
+    .step h3 { margin: 0 0 4px; letter-spacing: -.025em; }
+    .step p { margin: 0; color: var(--muted); }
+
+    .chat-demo {
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      display: grid;
+      gap: 14px;
+      min-height: 520px;
+      align-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-demo::before {
+      content: "";
+      position: absolute;
+      inset: -18% auto auto -14%;
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      background: rgba(139,211,255,.14);
+    }
+
+    .bubble {
+      position: relative;
+      z-index: 2;
+      width: fit-content;
+      max-width: 86%;
+      padding: 13px 15px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.10);
+      color: #effff3;
+      box-shadow: 0 14px 30px rgba(0,0,0,.18);
+    }
+
+    .bubble.me {
+      margin-left: auto;
+      color: #041007;
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      border: 0;
+    }
+
+    .bubble small { display: block; color: rgba(255,255,255,.62); font-weight: 800; margin-bottom: 4px; }
+    .bubble.me small { color: rgba(4,16,7,.62); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .plan {
+      padding: 24px;
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 390px;
+    }
+
+    .plan.featured {
+      border-color: rgba(102,242,142,.42);
+      box-shadow: 0 0 0 8px rgba(102,242,142,.09), var(--shadow);
+    }
+
+    .plan .save {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #05100a;
+      background: var(--gold);
+      font-size: .76rem;
+      font-weight: 950;
+    }
+
+    .plan h3 { margin: 18px 0 8px; font-size: 1.28rem; letter-spacing: -.035em; }
+    .price { font-size: 2.45rem; line-height: 1; letter-spacing: -.055em; font-weight: 950; margin: 18px 0 4px; }
+    .price span { color: var(--muted); font-size: .95rem; letter-spacing: 0; font-weight: 800; }
+
+    .plan ul {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 22px 0 24px;
+      color: var(--muted);
+    }
+
+    .plan li { display: flex; gap: 8px; align-items: flex-start; }
+    .plan li::before { content: "✓"; color: var(--green); font-weight: 950; }
+    .plan .btn { margin-top: auto; width: 100%; }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    details {
+      border-radius: 22px;
+      padding: 20px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+      letter-spacing: -.02em;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--green); font-size: 1.35rem; line-height: 1; }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 12px 0 0; color: var(--muted); }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contact-panel,
+    .contact-form { border-radius: var(--radius-xl); padding: clamp(22px, 4vw, 34px); }
+
+    .contact-panel {
+      display: grid;
+      align-content: space-between;
+      min-height: 460px;
+      background:
+        radial-gradient(360px 280px at 10% 10%, rgba(102,242,142,.18), transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+    }
+
+    .contact-form label { display: block; font-weight: 900; margin: 0 0 7px; }
+    .field { margin-bottom: 16px; }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      color: var(--ink);
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 16px;
+      padding: 14px 15px;
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: rgba(102,242,142,.52);
+      box-shadow: 0 0 0 6px rgba(102,242,142,.10);
+    }
+
+    .contact-form textarea { min-height: 150px; resize: vertical; }
+    .hp { position: absolute; left: -9999px; opacity: 0; }
+    .notice {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      color: #dfffe7;
+      background: rgba(102,242,142,.12);
+      border: 1px solid rgba(102,242,142,.24);
+      font-weight: 800;
+    }
+    .notice.error { color: #ffe5e5; background: rgba(255,84,84,.12); border-color: rgba(255,84,84,.25); }
+
+    .download {
+      border-radius: calc(var(--radius-xl) + 10px);
+      padding: clamp(34px, 6vw, 66px);
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .download::before {
+      content: "";
+      position: absolute;
+      inset: -120px auto auto 50%;
+      transform: translateX(-50%);
+      width: 720px;
+      height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(closest-side, rgba(102,242,142,.26), transparent 70%);
+      pointer-events: none;
+    }
+
+    .download > * { position: relative; z-index: 1; }
+    .download .h2 { margin-inline: auto; max-width: 14ch; }
+    .download .lead { margin: 16px auto 26px; }
+
+    .footer {
+      padding: 36px 0;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      background: rgba(0,0,0,.16);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-links { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .split,
+      .contact-wrap { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 590px; }
+      .timeline { position: static; }
+      .feature-card,
+      .feature-card.wide,
+      .feature-card.hero-card { grid-column: span 6; }
+      .pricing-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+
     @media (max-width: 860px) {
-      .nav-links { display: none; }
-      .menu-btn { display: inline-flex; }
-      .nav-cta { display: inline-flex; }
-      .cards .card { grid-column: span 6; }
-      .pricing .plan { grid-column: span 12; }
-      .testis { grid-template-columns: 1fr; }
-      .screens { grid-template-columns: 1fr; }
-      .faq { grid-template-columns: 1fr; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(var(--header-h) + 8px);
+        left: 19px;
+        right: 19px;
+        border-radius: 24px;
+        padding: 12px;
+        background: rgba(7,20,13,.96);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links a { padding: 14px 16px; }
+      .mobile-toggle { display: inline-flex; }
+      .nav-actions .btn:not(.mobile-toggle) { display: none; }
+      .showcase { grid-template-columns: 1fr; }
+      .showcase-card { min-height: auto; gap: 24px; }
+      .mini-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-links { justify-content: flex-start; }
     }
-    @media (max-width: 520px) {
-      .cards .card { grid-column: span 12; }
+
+    @media (max-width: 640px) {
+      :root { --header-h: 70px; }
+      .container { width: min(100% - 28px, 1160px); }
+      .brand-text { display: none; }
+      .brand img { height: 38px; }
+      .h1 { font-size: clamp(3.05rem, 16vw, 4.75rem); }
+      .hero-logo { width: min(96vw, 470px); }
+      .hero-ctas .btn,
+      .button-row .btn { width: 100%; }
+      .hero-visual,
+      .phone-stage { min-height: 510px; }
+      .phone.secondary,
+      .phone.tertiary { opacity: .32; }
+      .floating-card { display: none; }
+      .feature-card,
+      .feature-card.wide,
+      .feature-card.hero-card { grid-column: span 12; min-height: auto; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .mini-grid { grid-template-columns: 1fr; }
+      .marquee { border-radius: 18px; }
+      .screen-frame { width: min(230px, 80%); }
     }
 
-
-
-/* ====== Contact ====== */
-.contact-section { padding: 4.5rem 0; }
-.contact-card { max-width: 700px; margin-inline: auto; background: var(--card); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow); }
-.contact-card h2 { margin-top: 0; }
-.contact-card label { display: block; margin-top: 1rem; font-weight: 600; }
-.contact-card input, .contact-card textarea {
-width: 100%;
-padding: .75rem 1rem;
-margin-top: .35rem;
-border-radius: 10px;
-border: 1px solid rgba(255,255,255,.25);
-background: rgba(255,255,255,.04);
-color: var(--text);
-font: inherit;
-}
-.contact-card textarea { resize: vertical; min-height: 140px; }
-.contact-card button { margin-top: 1.5rem; }
-
-
-/* inline notice styles */
-.notice{
-  margin-top:.75rem; font-weight:600; color:var(--text);
-  background:rgba(74,222,128,.12); border:1px solid rgba(74,222,128,.25);
-  padding:.75rem 1rem; border-radius:10px;
-}
-.notice.error{
-  background:rgba(239,68,68,.12); border-color:rgba(239,68,68,.35);
-}
-/* hide honeypot field from humans */
-.hp{ position:absolute; left:-9999px; height:0; width:0; opacity:0; }
-
-
-.phone .screen-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* crop nicely if aspect ratio differs */
-  border-radius: 18px; /* matches phone’s rounded corners */
-  display: block;
-}
-
-.shot .screen-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* crop nicely if aspect ratio differs */
-  border-radius: 18px; /* matches phone’s rounded corners */
-  display: block;
-}
-
-.brand-logo {
-  height: 50px;         /* adjust to your preference */
-  width: auto;          /* keeps aspect ratio */
-  border-radius: 8px;   /* optional: soften corners if PNG/JPG */
-}
-
-.hero-logo{
-  display:block;
-  height:auto;
-  width: clamp(260px, 28vw, 480px);
-  margin: 0 0 12px 0;
-}
-
-
-
-/* --- Force the same palette on iOS/Light mode --- */
-:root { color-scheme: dark; }             /* tells Safari to use dark UI defaults */
-
-/* If the device is set to Light, keep our dark golf palette anyway */
-@media (prefers-color-scheme: light){
-  :root{
-    --bg: #0b3d20;
-    --bg-soft: #184d28;
-    --card: rgba(255,255,255,0.06);
-    --text: #f5f8f0;
-    --muted: #c8d5c0;
-    --shadow: 0 10px 35px rgba(0,0,0,.45);
-  }
-}
-
-/* Explicit text colors so Safari doesn’t auto-tint */
-body, h1, h2, h3, h4, h5, h6, p, li, .h1, .lead, .tag { color: var(--text) !important; }
-.tag{ opacity:.75; }
-
-/* Make images never overflow on mobile */
-img, svg, video, canvas { max-width: 100%; height: auto; display: block; }
-
-/* Header logo size (top-left) */
-.brand-logo { height: 36px; width: auto; }
-@media (max-width: 600px){ .brand-logo { height: 32px; } }
-
-/* Hero wordmark image above the tagline */
-/*.hero-logo { width: clamp(180px, 60vw, 320px); height: auto; margin: 0 0 12px 0; }*/
-
-/* Phone/screenshot mockup */
-.phone { width: min(92vw, 360px); margin-inline: auto; }
-.phone img, .screen-img { width: 100%; height: auto; border-radius: 18px; }
-
-/* Screens/gallery grid (if you have one) */
-.screens-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
-@media (max-width: 960px){ .screens-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 600px){ .screens-grid { grid-template-columns: 1fr; } }
-.screens-grid img { width: 100%; height: auto; border-radius: 16px; }
-
-/* Big headline scale for small phones */
-@media (max-width: 600px){
-  .h1 { font-size: clamp(28px, 7.8vw, 36px); line-height: 1.15; }
-}
-
-@media (max-width: 600px){
-  .hero-logo{
-    width: min(94vw, 680px);  /* fills most of the screen width */
-  }
-}
-
-
-/* Background image layer */
-.fb-background{
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  /* change the url to your file (keep path/case exact) */
-  background: url("./images/fb-background.jpg") center / cover no-repeat fixed;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  /* optional: add a subtle green tint if your photo is light */
-  /* background-blend-mode: multiply; */
-}
-
-/* Transparent overlay between background and content */
-.fb-scrim{
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  /* base scrim + vertical gradient for extra legibility near hero */
-  --scrim: rgba(0,0,0,.35);
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.35) 35%, rgba(0,0,0,.45) 100%),
-    var(--scrim);
-  /* soft blur that works in Safari/iOS too */
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-}
-
-.main-content{ position: relative; z-index: 2; }
-
-/* On small phones, make the scrim a touch stronger */
-@media (max-width: 600px){
-  .fb-scrim{ --scrim: rgba(0,0,0,.50); }
-}
-
-/* Ensure text always renders with your chosen color (prevents iOS auto-tint) */
-:root { color-scheme: dark; }
-@media (prefers-color-scheme: light){
-  :root{
-    --bg:#0b3d20; --bg-soft:#184d28; --card:rgba(255,255,255,.06);
-    --text:#f5f8f0; --muted:#c8d5c0; --shadow:0 10px 35px rgba(0,0,0,.45);
-  }
-}
-body, h1, h2, h3, p, li, .h1, .lead, .tag { color: var(--text)!important; }
-
-
-/* Darker glass overlay for all cards/boxes */
-:root { --card: rgba(0, 0, 0, 0.38); }   /* was rgba(255,255,255,.06) */
-@media (prefers-color-scheme: light){
-  :root { --card: rgba(10,16,30, .10); } /* keep lighter in light mode */
-}
-
-/* (optional) add a bit of glass blur inside each box */
-.card, .shot, .plan, .quote, details, .contact-card, .mock {
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
-          backdrop-filter: blur(6px) saturate(120%);
-}
-
-.fb-bg{ position: fixed; inset: 0; z-index: 0; pointer-events:none; overflow:hidden; }
-.fb-bg-img{
-  position:absolute; inset:0;
-  width:100vw; height:100vh;
-  object-fit: cover;         /* cover without zoom bugs */
-  object-position: 50% 25%;  /* tweak framing on mobile if needed */
-}
-
-
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
   </style>
 </head>
 
-
-
-
-
-
 <body>
+  <div class="hero-bg" aria-hidden="true">
+    <img src="./images/fb-background.jpg" alt="" />
+  </div>
+  <div class="orb-field" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
 
-    <!-- Background image -->
-    <div class="fb-bg">
-      <img src="./images/fb-background.jpg" alt="" class="fb-bg-img" />
-    </div>
-
-    <!-- Transparent overlay (scrim) above the background -->
-    <div class="fb-scrim" aria-hidden="true"></div>
-
-    <main class="main-content">
-    
-  <!-- ===== Header ===== -->
-  <header class="header">
+  <header class="nav-wrap">
     <div class="container nav">
-        <a href="#" class="brand" aria-label="Fairway Buddies home">
-            <img src="images/fblogoUPDT.png" alt="Fairway Buddies Logo" class="brand-logo">
-          </a>
-      <nav class="nav-links" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Fairway Buddies home">
+        <img src="images/fblogoUPDT.png" alt="Fairway Buddies logo" />
+        <span class="brand-text">
+          <strong>Fairway Buddies</strong>
+          <span>Golf together</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" id="site-menu" aria-label="Primary navigation">
         <a href="#features">Features</a>
         <a href="#screens">Screens</a>
+        <a href="#how">How it works</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
-      <div class="nav-cta">
-        <a class="btn outline" href="#download">Get the App</a>
+
+      <div class="nav-actions">
+        <a class="btn secondary" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Download</a>
+        <button class="btn secondary mobile-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-menu">Menu</button>
       </div>
-      <button class="menu-btn btn outline" aria-label="Open menu" onclick="toggleMenu()">Menu</button>
     </div>
   </header>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero container">
-    <div class="hero-wrap">
-      <div>
-        <!-- Wordmark/Logo: responsive, high-DPI, never overflows -->
-        <img
-        src="./images/fairway-buddies_light.png"
-        alt="Fairway Buddies Logo"
-        class="hero-logo"
-        width="640" height="180"
-        decoding="async" fetchpriority="high"
-      />
-  
-        <div class="tag">Golf is better together</div>
-        <h1 class="h1">More than a game — it’s the buddies you make.</h1>
-        <p>Fairway Buddies matches golfers by <strong>skill level</strong>, <strong>location</strong>, and <strong>availability</strong>. Find your pace, make new friends, and tee off with confidence.</p>
-  
-        <div class="hero-ctas">
-          <a class="btn" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Download the app</a>
-          <a class="btn outline" href="#pricing">See Premium</a>
-        </div>
-  
-        <div class="badges" id="download" aria-label="App store badges">
-          <div class="store-badge"> App Store (Available Now!)</div>
-          <div class="store-badge">Google Play (later)</div>
-        </div>
-  
-        <p class="muted" style="margin-top:.6rem">No random pairings. No pressure. Just great rounds with people who play like you.</p>
-      </div>
-  
-      <div class="mock" aria-hidden="true">
-        <div class="phone">
-          <img
-            src="./images/app_discover.jpeg"
-            alt="Fairway Buddies App Screenshot"
-            class="screen-img"
-            width="1170" height="2532"
-            loading="lazy" decoding="async"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="badge">⛳ More than a game — it’s the buddies you make.</span>
+          <img class="hero-logo" src="./images/fairway-buddies_light.png" alt="Fairway Buddies" width="640" height="180" decoding="async" fetchpriority="high" />
+          <h1 class="h1"><span class="gradient-text">Find your golf people.</span></h1>
+          <p class="lead">Meet golfers who match your skill, schedule, location, and vibe. Fairway Buddies combines discovery, direct messaging, community chat rooms, nearby courses, and round tracking into one social golf app.</p>
 
-  <!-- ===== Features ===== -->
-  <section class="section" id="features">
-    <div class="container">
-      <div class="grid cards">
-        <article class="card">
-          <div class="icon">👟</div>
-          <h3 class="h3">Skill‑based Connections</h3>
-          <p class="muted">Set your preferences (Beginner → Scratch) and connect with golfers at your pace.</p>
-        </article>
-        <article class="card">
-          <div class="icon">📍</div>
-          <h3>Courses Nearby</h3>
-          <p class="muted">Discover public courses within 50 miles, filter by price, and tap to book tee times.</p>
-        </article>
-        <article class="card">
-          <div class="icon">💬</div>
-          <h3>Message & Groups</h3>
-          <p class="muted">DM new buddies, and plan your next round—right in the app.</p>
-        </article>
-        <article class="card">
-          <div class="icon">👜</div>
-          <h3>What’s in Your Bag</h3>
-          <p class="muted">Keep track of your club distances within the app.</p>
-        </article>
-        <article class="card">
-          <div class="icon">🧭</div>
-          <h3>Feed & Marketplace</h3>
-          <p class="muted">New feature will be coming soon! Follow us for updates.</p>
-        </article>
-        <article class="card">
-          <div class="icon">🛡️</div>
-          <h3>Safety tools</h3>
-          <p class="muted">Community guidelines, report/block, and privacy controls—built in.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+          <div class="hero-ctas">
+            <a class="btn" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Download on the App Store</a>
+            <a class="btn secondary" href="#features">Explore the app</a>
+          </div>
 
-  <!-- ===== Screenshots ===== -->
-  <section class="section" id="screens">
-    <div class="container">
-      <div class="grid screens">
-        <div class="shot">
-            <img src="images/app_chat.PNG" alt="Fairway Buddies Chat" class="screen-img">
+          <div class="proof-row" aria-label="Feature highlights">
+            <span class="proof">🗓️ Match by availability</span>
+            <span class="proof">🌍 Global chat rooms</span>
+            <span class="proof">📍 Search any city</span>
+            <span class="proof">🏌️ Track every round</span>
+          </div>
         </div>
-        <div class="shot">
-            <img src="images/app_map.PNG" alt="Book Tee Times Map" class="screen-img">
-        </div>
-        <div class="shot">
-            <img src="images/app_witb.PNG" alt="What's in your Bag" class="screen-img">
+
+        <div class="hero-visual" aria-label="Fairway Buddies app preview">
+          <div class="phone-stage glass">
+            <div class="floating-card float-1">
+              <strong>Availability match</strong>
+              <span>Find golfers free Tuesday morning, Sunday afternoon, or whenever you play.</span>
+            </div>
+            <div class="floating-card float-2">
+              <strong>Community energy</strong>
+              <span>Global, new golfer, premium, and regional rooms keep the app alive.</span>
+            </div>
+            <div class="floating-card float-3">
+              <strong>Round history</strong>
+              <span>Log scores, putts, GIR, FIR, and notes after every round.</span>
+            </div>
+
+            <div class="phone tertiary">
+              <img src="images/app_chat.PNG" alt="Fairway Buddies chat screen" loading="lazy" decoding="async" />
+            </div>
+            <div class="phone secondary">
+              <img src="images/app_map.PNG" alt="Fairway Buddies nearby courses screen" loading="lazy" decoding="async" />
+            </div>
+            <div class="phone primary">
+              <img src="./images/app_discover2.PNG" alt="Fairway Buddies discover screen" loading="eager" decoding="async" />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ===== Pricing ===== -->
-  <section class="section" id="pricing">
-    <div class="container grid pricing">
-      <div class="plan">
-        <div class="tag">Free</div>
-        <h3 class="h2">Starter</h3>
-        <p class="muted">Everything you need to tee off with new friends.</p>
-        <div class="price">$0</div>
-        <ul>
-          <li>✔︎ Browse golfers & profiles</li>
-          <li>✔︎ Limited messages per day</li>
-          <li>✔︎ Courses Nearby</li>
-          <li>✔︎ Basic Feed access</li>
-        </ul>
-        <a class="btn outline" href="#download">Get started</a>
+      <div class="container">
+        <div class="mini-grid">
+          <div class="mini glass"><strong>4</strong><span>Ways to connect: Discover, requests, DMs, and chat rooms.</span></div>
+          <div class="mini glass"><strong>3</strong><span>Premium options: monthly, 6-month, and annual.</span></div>
+          <div class="mini glass"><strong>24/7</strong><span>Community spaces for golfers between rounds.</span></div>
+          <div class="mini glass"><strong>18</strong><span>Hole-by-hole scorecard and round history tools.</span></div>
+        </div>
+
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee-track">
+            <span><b>•</b> Find golfers near you</span><span><b>•</b> Search any city with Premium</span><span><b>•</b> Track rounds</span><span><b>•</b> Join golf chat rooms</span><span><b>•</b> Match by skill</span><span><b>•</b> Discover nearby courses</span><span><b>•</b> No more awkward random pairings</span>
+            <span><b>•</b> Find golfers near you</span><span><b>•</b> Search any city with Premium</span><span><b>•</b> Track rounds</span><span><b>•</b> Join golf chat rooms</span><span><b>•</b> Match by skill</span><span><b>•</b> Discover nearby courses</span><span><b>•</b> No more awkward random pairings</span>
+          </div>
+        </div>
       </div>
-      <div class="plan" style="border-color: rgba(22,209,154,.6); box-shadow: var(--ring)">
-        <div class="tag" style="color:#0b1020; background:linear-gradient(135deg,var(--brand),#24e1c0); display:inline-block; padding:.25rem .6rem; border-radius:999px;">Most Popular</div>
-        <h3 class="h2">Premium</h3>
-        <p class="muted">Unlock pro features and match faster.</p>
-        <div class="price">$4.99<span class="muted" style="font-size:1rem; font-weight:600">/mo</span></div>
-        <ul>
-          <li>✔︎ Unlimited messages & reactions</li>
-          <li>✔︎ Prioritizes Discovery by skill & distance</li>
-          <li>✔︎ Advanced course filters + favorites</li>
-          <li>✔︎ Discover golfers in other cities</li>
-        </ul>
-        <a class="btn" href="#download">Go Premium</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Testimonials ===== -->
-  <section class="section">
-    <div class="container grid testis">
-      <figure class="quote">
-        <blockquote>“Matched with a 10‑handicap in 10 minutes. Best round I’ve had all season.”</blockquote>
-        <figcaption class="muted">— Anthony Z.</figcaption>
-      </figure>
-      <figure class="quote">
-        <blockquote>“Finally found golfers at my pace. No pressure, just fun golf.”</blockquote>
-        <figcaption class="muted">— Adriana Z.</figcaption>
-      </figure>
-      <figure class="quote">
-        <blockquote>“The Courses Nearby filters are clutch. Booked and played after work.”</blockquote>
-        <figcaption class="muted">— Vincent L.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ===== FAQ ===== -->
-  <section class="section" id="faq">
-    <div class="container">
-      <h2 class="h2" style="margin-bottom:1rem">Frequently asked questions</h2>
-      <div class="grid faq">
-        <details>
-          <summary>Is Fairway Buddies free?</summary>
-          <p class="muted">Yes—our Starter plan is free. Premium adds unlimited messaging, prioritizes your position in the Discovery tab, and connect with golfers in any city.</p>
-        </details>
-        <details>
-          <summary>How do you connect with golfers?</summary>
-          <p class="muted">You can view golfer cards within the Discover tab and take a peek at their profile. If you want to connect with the golfer, just send them a message request!</p>
-        </details>
-        <details>
-          <summary>What about safety?</summary>
-          <p class="muted">We have in‑app report/block tools, community guidelines, and privacy controls. Please review them before your first round.</p>
-        </details>
-        <details>
-          <summary>Which regions do you support?</summary>
-          <p class="muted">We’re launching in the U.S. first and expanding from there. Course data improves as more golfers join.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- ===== Contact ===== -->
-<section class="contact-section" id="contact">
-    <div class="container">
-    <div class="contact-card">
-    <h2 class="h2">Contact Us</h2>
-    <p class="muted">Need help or have questions? Send us a message and our support team will respond shortly.</p>
-    <form id="contact-form" action="https://formspree.io/f/xeolylpl" method="POST">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required>
-      
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required>
-      
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-      
-        <!-- spam honeypot (bots fill everything) -->
-        <input type="text" name="_gotcha" class="hp" autocomplete="off">
-      
-        <!-- optional: customize email subject -->
-        <input type="hidden" name="_subject" value="Support inquiry — Fairway Buddies">
-      
-        <button class="btn" type="submit">Send Message</button>
-      
-        <!-- inline status message -->
-        <p id="contact-notice" class="notice" role="status" aria-live="polite" hidden></p>
-      </form>
-    </div>
-    </div>
     </section>
 
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Built for modern golfers</span>
+          <h2 class="h2">A social golf platform, not just a finder.</h2>
+          <p class="lead">Your site should make Fairway Buddies feel bigger than a profile browser. This version leads with the full ecosystem: matching, messaging, community, rounds, courses, and premium discovery.</p>
+        </div>
 
+        <div class="feature-grid">
+          <article class="feature-card hero-card glass">
+            <div class="icon">🧭</div>
+            <h3>Discover golfers who actually fit your schedule.</h3>
+            <p>Search by distance, city, skill level, gender preferences, days available, time windows, and playing style. Less guessing. More tee times that actually happen.</p>
+          </article>
 
+          <article class="feature-card glass">
+            <div class="icon">👑</div>
+            <h3>Premium visibility</h3>
+            <p>Give serious golfers more reach with unlimited messaging, search-any-city, priority discovery, and premium profile signals.</p>
+          </article>
 
-  <!-- ===== CTA ===== -->
-  <section class="cta">
-    <div class="container">
-      <h2 class="h2">Ready to find your next golf buddy?</h2>
-      <p class="muted">Join a community that plays at your pace.</p>
-      <div class="hero-ctas" style="justify-content:center">
-        <a class="btn" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Get the app</a>
-        <a class="btn outline" href="#features">Explore features</a>
+          <article class="feature-card wide glass">
+            <div class="icon">🌍</div>
+            <h3>Global community chat rooms</h3>
+            <p>Keep users engaged even when they are not booking a round. Global chat, new golfer chat, tech support, premium rooms, and regional rooms can create a living golf community.</p>
+          </article>
+
+          <article class="feature-card wide glass">
+            <div class="icon">📋</div>
+            <h3>Virtual scorecard and round tracking</h3>
+            <p>Log hole-by-hole scores, putts, GIR, FIR, and notes. Save recent rounds and turn Fairway Buddies into a useful golf companion before, during, and after the round.</p>
+          </article>
+
+          <article class="feature-card glass">
+            <div class="icon">💬</div>
+            <h3>Message requests</h3>
+            <p>Let golfers start conversations with more comfort and control before planning a meetup.</p>
+          </article>
+
+          <article class="feature-card glass">
+            <div class="icon">📍</div>
+            <h3>Nearby courses</h3>
+            <p>Explore local courses and choose where to play once the right buddy is found.</p>
+          </article>
+
+          <article class="feature-card glass">
+            <div class="icon">🛡️</div>
+            <h3>Safety controls</h3>
+            <p>Community guidelines, privacy controls, block/report tools, and message requests help users feel more confident.</p>
+          </article>
+
+          <article class="feature-card glass">
+            <div class="icon">🎒</div>
+            <h3>What’s in your bag</h3>
+            <p>Add personality with favorite gear, clubs, and golf context that makes each profile feel more real.</p>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== Footer ===== -->
+    <section class="section-tight" id="screens">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Product preview</span>
+          <h2 class="h2">Show visitors the app before they tap download.</h2>
+          <p class="lead">Use your real screenshots to make the landing page feel trustworthy, polished, and App Store-ready.</p>
+        </div>
+
+        <div class="showcase">
+          <article class="showcase-card glass">
+            <div class="screen-frame"><img src="./images/app_discover2.PNG" alt="Discover golfers in Fairway Buddies" loading="lazy" decoding="async" /></div>
+            <div class="showcase-copy">
+              <h3>Discover better golf matches</h3>
+              <p>Search for golfers by location, skill level, availability, and vibe so it is easier to turn a profile into a tee time.</p>
+            </div>
+          </article>
+
+          <article class="showcase-card glass">
+            <div class="screen-frame"><img src="images/app_chat.PNG" alt="Fairway Buddies chat screen" loading="lazy" decoding="async" /></div>
+            <div class="showcase-copy">
+              <h3>Chat before you play</h3>
+              <p>Message requests, direct chat, and community rooms help golfers connect before meeting at the course.</p>
+            </div>
+          </article>
+
+          <article class="showcase-card glass">
+            <div class="screen-frame"><img src="images/app_analytics.PNG" alt="Fairway Buddies virtual scorecard app_analytics" loading="lazy" decoding="async" /></div>
+            <div class="showcase-copy">
+              <h3>Round Analysis</h3>
+              <p>Built in virtual scorecard with post-round analytics and AI insights.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container split">
+        <div class="section-head">
+          <span class="eyebrow">How it works</span>
+          <h2 class="h2">From solo golfer to booked round.</h2>
+          <p class="lead">Make the value obvious in three steps: build the profile, discover compatible golfers, then chat, track, and keep coming back.</p>
+          <div class="button-row">
+            <a class="btn" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Start finding golfers</a>
+            <a class="btn secondary" href="#pricing">View Premium</a>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <article class="step glass">
+            <div class="step-num">1</div>
+            <div>
+              <h3>Create your golfer profile</h3>
+              <p>Add skill level, availability, location, favorite courses, languages, photos, and what makes you fun to play with.</p>
+            </div>
+          </article>
+
+          <article class="step glass">
+            <div class="step-num">2</div>
+            <div>
+              <h3>Find the right golf buddies</h3>
+              <p>Filter by nearby golfers or search other cities when traveling. Prioritize people who fit your schedule and playing style.</p>
+            </div>
+          </article>
+
+          <article class="step glass">
+            <div class="step-num">3</div>
+            <div>
+              <h3>Chat, play, and track the round</h3>
+              <p>Coordinate in chat, discover courses nearby, and use the scorecard to save your round history.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container split">
+        <div class="chat-demo glass" aria-label="Community chat preview">
+          <div class="bubble"><small>New Golfer Chat</small>Any tips for playing my first round with people I don’t know?</div>
+          <div class="bubble me"><small>Fairway Buddies</small>Start with a quick intro, share your pace, and let them know you’re there to have fun. You’ll fit right in. ⛳</div>
+          <div class="bubble"><small>Global Chat</small>Anyone in Scottsdale trying to play this weekend?</div>
+          <div class="bubble me"><small>Premium Room</small>Search the city, filter by Saturday morning, and send a few message requests.</div>
+        </div>
+
+        <div class="section-head">
+          <span class="eyebrow">Retention built in</span>
+          <h2 class="h2">Give golfers a reason to open the app between rounds.</h2>
+          <p class="lead">A landing page should sell the long-term value. Community rooms, round tracking, nearby courses, future weekly challenges, and premium discovery all make Fairway Buddies feel useful even when someone is not actively booking a tee time.</p>
+          <div class="proof-row">
+            <span class="proof">🔥 Weekly challenge potential</span>
+            <span class="proof">📊 Round stats</span>
+            <span class="proof">🏌️ New golfer support</span>
+            <span class="proof">🧑‍🤝‍🧑 Regional community</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Simple pricing</span>
+          <h2 class="h2">Start free. Go Premium when you want more reach.</h2>
+          <p class="lead">Show each plan clearly so users immediately understand the monthly, 6-month, and annual options.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="plan glass">
+            <span class="badge">Starter</span>
+            <h3>Free</h3>
+            <p class="muted">For golfers who want to explore the community.</p>
+            <div class="price">$0</div>
+            <ul>
+              <li>Browse golfer profiles</li>
+              <li>Use basic discovery</li>
+              <li>Access community spaces</li>
+              <li>Track rounds with core tools</li>
+            </ul>
+            <a class="btn secondary" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Get started</a>
+          </article>
+
+          <article class="plan glass featured">
+            <span class="save">Popular</span>
+            <span class="badge">Premium</span>
+            <h3>Monthly</h3>
+            <p class="muted">Flexible access for golfers ready to connect.</p>
+            <div class="price">$4.99<span>/mo</span></div>
+            <ul>
+              <li>Unlimited message requests</li>
+              <li>Search any city</li>
+              <li>Priority in Discover</li>
+              <li>Premium profile badge</li>
+            </ul>
+            <a class="btn" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Go Premium</a>
+          </article>
+
+          <article class="plan glass">
+            <span class="save">Save</span>
+            <span class="badge">Premium</span>
+            <h3>6 Months</h3>
+            <p class="muted">Best for golfers who play through the season.</p>
+            <div class="price">$23.99<span>/6 mo</span></div>
+            <ul>
+              <li>All monthly Premium perks</li>
+              <li>More affordable than monthly</li>
+              <li>Great for seasonal golfers</li>
+              <li>Community and discovery access</li>
+            </ul>
+            <a class="btn secondary" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Choose 6 months</a>
+          </article>
+
+          <article class="plan glass">
+            <span class="save">Best value</span>
+            <span class="badge">Premium</span>
+            <h3>Annual</h3>
+            <p class="muted">For golfers who want the full year of connection.</p>
+            <div class="price">$29.99<span>/yr</span></div>
+            <ul>
+              <li>All Premium perks</li>
+              <li>Lowest monthly equivalent</li>
+              <li>Ideal for frequent golfers</li>
+              <li>Best long-term value</li>
+            </ul>
+            <a class="btn secondary" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Choose annual</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight" id="faq">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="h2">Questions before downloading.</h2>
+        </div>
+
+        <div class="faq-grid">
+          <details class="glass">
+            <summary>Is Fairway Buddies free?</summary>
+            <p>Yes. You can start free with core discovery, community access, and round tracking. Premium unlocks more reach and convenience.</p>
+          </details>
+
+          <details class="glass">
+            <summary>How does Fairway Buddies match golfers?</summary>
+            <p>Golfers can discover others by location, skill level, gender preferences, availability, profile details, and playing style.</p>
+          </details>
+
+          <details class="glass">
+            <summary>Can I use it when traveling?</summary>
+            <p>Yes. Premium users can search any city, which is useful for finding golfers before a trip or weekend getaway.</p>
+          </details>
+
+          <details class="glass">
+            <summary>What are community chat rooms?</summary>
+            <p>They are shared spaces for topics like global golf talk, new golfer questions, premium conversations, tech support, and future regional groups.</p>
+          </details>
+
+          <details class="glass">
+            <summary>Can I track my golf rounds?</summary>
+            <p>Yes. The virtual scorecard lets you log scores, putting, GIR, FIR, notes, and round history.</p>
+          </details>
+
+          <details class="glass">
+            <summary>What safety features are included?</summary>
+            <p>Fairway Buddies supports message requests, privacy controls, report/block options, and community guidelines to help people connect with confidence.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-wrap">
+        <div class="contact-panel glass">
+          <div>
+            <span class="eyebrow">Contact</span>
+            <h2 class="h2" style="margin-top:14px;">Feedback, partnerships, or support?</h2>
+            <p class="lead">Send a message and keep building the golf community with us.</p>
+          </div>
+          <div class="proof-row">
+            <span class="proof">📸 Instagram: @fairway.buddies</span>
+            <span class="proof">⛳ Community-first golf app</span>
+          </div>
+        </div>
+
+        <form class="contact-form glass" id="contact-form" action="https://formspree.io/f/xeolylpl" method="POST">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <input type="text" name="_gotcha" class="hp" autocomplete="off" tabindex="-1" />
+          <input type="hidden" name="_subject" value="Support inquiry — Fairway Buddies" />
+
+          <button class="btn" type="submit">Send message</button>
+          <p id="contact-notice" class="notice" role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section-tight" id="download">
+      <div class="container">
+        <div class="download glass">
+          <span class="eyebrow">Download Fairway Buddies</span>
+          <h2 class="h2">Stop hoping for a good pairing. Find one.</h2>
+          <p class="lead">Discover compatible golfers, join the community, and keep your round history in one sleek golf app.</p>
+          <div class="button-row" style="justify-content:center;">
+            <a class="btn" href="https://apps.apple.com/us/app/fairway-buddies/id6752227564">Download on the App Store</a>
+            <a class="btn secondary" href="#features">See features</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer class="footer">
-    <div class="container footgrid">
-      <p>© <span id="year"></span> Fairway Buddies. All rights reserved.</p>
-      <div class="social">
-        <a href="https://instagram.com/fairway.buddies/" aria-label="Instagram" title="Instagram">📸</a>
+    <div class="container footer-grid">
+      <div>
+        <strong style="color:var(--ink);">Fairway Buddies</strong>
+        <div>© <span id="year"></span> Fairway Buddies. All rights reserved.</div>
       </div>
-    </div>
-    <div class="container" style="margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;">
-      <a class="muted" href="#">Privacy Policy</a>
-      <a class="muted" href="#">Terms of Service</a>
-      <a class="muted" href="#">Community Guidelines</a>
-      <a class="muted" href="#">Support</a>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Community Guidelines</a>
+        <a href="#contact">Support</a>
+        <a href="https://instagram.com/fairway.buddies/">Instagram</a>
+      </nav>
     </div>
   </footer>
 
   <script>
-    function toggleMenu(){
-      const nav = document.querySelector('.nav-links');
-      if(!nav) return;
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-      nav.style.flexDirection = 'column';
-      nav.style.gap = '0';
-      nav.style.background = 'rgba(11,16,32,.95)';
-      nav.style.position = 'absolute';
-      nav.style.right = '1rem';
-      nav.style.top = '64px';
-      nav.style.padding = '.5rem';
-      nav.style.border = '1px solid rgba(255,255,255,.12)';
-      nav.style.borderRadius = '12px';
-    }
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    const menuButton = document.querySelector('.mobile-toggle');
+    const menu = document.getElementById('site-menu');
 
-<script>
+    if (menuButton && menu) {
+      menuButton.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.textContent = isOpen ? 'Close' : 'Menu';
+      });
+
+      menu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          menu.classList.remove('open');
+          menuButton.setAttribute('aria-expanded', 'false');
+          menuButton.textContent = 'Menu';
+        });
+      });
+    }
+
+    const year = document.getElementById('year');
+    if (year) year.textContent = new Date().getFullYear();
+
     (() => {
       const form = document.getElementById('contact-form');
       if (!form) return;
+
       const notice = document.getElementById('contact-notice');
       const btn = form.querySelector('button[type="submit"]');
-    
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        btn.disabled = true; btn.textContent = 'Sending…';
-    
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!btn || !notice) return;
+
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
         try {
-          const res = await fetch(form.action, {
+          const response = await fetch(form.action, {
             method: 'POST',
             body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
+            headers: { Accept: 'application/json' }
           });
-    
-          if (res.ok) {
-            notice.hidden = false;
-            notice.className = 'notice';
-            notice.textContent = 'Thanks — message sent! We’ll reply shortly.';
-            form.reset();
-          } else {
-            throw new Error('Formspree error');
-          }
-        } catch {
+
+          if (!response.ok) throw new Error('Form submission failed');
+
+          notice.hidden = false;
+          notice.className = 'notice';
+          notice.textContent = 'Thanks — message sent! We’ll reply shortly.';
+          form.reset();
+        } catch (error) {
           notice.hidden = false;
           notice.className = 'notice error';
           notice.textContent = 'Oops, something went wrong. Please try again in a minute.';
         } finally {
-          btn.disabled = false; btn.textContent = 'Send Message';
+          btn.disabled = false;
+          btn.textContent = 'Send message';
         }
       });
     })();
-    </script>
-</main>
+  </script>
 </body>
 </html>
