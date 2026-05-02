@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "L6LV6YLXT3.com.andrewakabane.fairwaybuddies"
+        ],
+        "components": [
+          {
+            "/": "/join/*",
+            "comment": "Fairway Buddies crew join links"
+          }
+        ]
+      }
+    ]
+  }
+}
